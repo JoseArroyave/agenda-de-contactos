@@ -1,55 +1,37 @@
 <?php
-
-$nombre = $_GET['nombre'];
-$numero  =  $_GET['numero'];
-$id = $_GET['id'];
-
-try {
-  require_once('funciones/bd_conexion.php');
-  $sql = "UPDATE `contactos` SET ";
-  $sql .= "`nombre`= '{$nombre}', ";
-  $sql .= "`numero` = '{$numero}' ";
-  $sql .= "WHERE `id` = {$id}";
-
-  $resultado = $conn->query($sql);
-} catch (Exception $e) {
-  $error = $e->getMessage();
+function peticion_ajax()
+{
+  return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 }
-?>
-<!DOCTYPE html>
-<html>
 
-<head>
-  <meta charset="utf-8">
-  <title>Agenda PHP</title>
-  <link href="https://fonts.googleapis.com/css?family=Proza+Libre" rel="stylesheet">
+$datos = $_GET['datos'];
+$datos = json_decode($datos, true);
 
-  <link rel="stylesheet" href="css/estilos.css" media="screen" title="no title">
-</head>
+$nombre = $datos['nombre'];
+$numero  =  $datos['numero'];
+$id = $datos['id'];
 
-<body>
+if (peticion_ajax()) {
+  try {
+    require_once('funciones/bd_conexion.php');
+    $sql = "UPDATE contactos SET ";
+    $sql .= "nombre= '{$nombre}', ";
+    $sql .= "numero = '{$numero}' ";
+    $sql .= "WHERE id = {$id}";
 
-  <div class="contenedor">
-    <h1>Agenda de Contactos</h1>
+    $resultado = $conn->query($sql);
+    echo json_encode(array(
+      'respuesta' => $resultado,
+      'nombre' => $nombre,
+      'id' => $id,
+      'numero' => $numero
+    ));
 
-    <div class="contenido">
+  } catch (Exception $e) {
+    $error = $e->getMessage();
+  }
 
-      <?php
-      if ($conn->query($sql) === TRUE) {
-        echo "Contacto Actualizado";
-      } else {
-        echo "Error actualizando: " . $conn->error;
-      }
-      ?>
-      <a class="volver" href="index.php">Volver a Inicio</a>
-    </div>
-  </div>
-
-  <?php
   $conn->close();
-  ?>
-
-
-</body>
-
-</html>
+} else {
+  exit;
+}

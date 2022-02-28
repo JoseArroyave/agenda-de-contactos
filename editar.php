@@ -31,17 +31,13 @@ try {
       <form action="actualizar.php" method="get">
         <?php while ($registros = $resultado->fetch_assoc()) { ?>
           <div class="campo">
-            <label for="nombre">Nombre
-              <input type="text" name="nombre" id="nombre" value="<?php echo $registros['nombre']; ?>">
-            </label>
-          </div>
-          <div class="campo">
-            <label for="numero">Teléfono
-              <input type="text" name="numero" id="numero" value="<?php echo $registros['numero']; ?>">
-            </label>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" value="<?php echo $registros['nombre']; ?>">
+            <label for="numero">Teléfono</label>
+            <input type="text" name="numero" id="numero" value="<?php echo $registros['numero']; ?>">
           </div>
           <input type="hidden" name="id" value="<?php echo $registros['id']; ?>">
-          <input type="submit" value="Actualizar">
+          <input type="submit" value="Actualizar" class="boton">
         <?php } ?>
       </form>
 
