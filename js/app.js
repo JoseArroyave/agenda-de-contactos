@@ -47,17 +47,14 @@ checkTodos.addEventListener('click', function () {
 
 function crearUsuario() {
   var form_datos = new FormData(formulario);
-  for ([key, value] of form_datos.entries()) {
-/*     console.log(key + ": " + value);
- */  }
   var xhr = new XMLHttpRequest();
   xhr.open('POST', action, true);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       var resultado = xhr.responseText;
-/*       console.log(resultado);
- */      var json = JSON.parse(resultado);
+      console.log(resultado);
+      var json = JSON.parse(resultado);
       if (json.respuesta == true) {
         registroExitoso(json.nombre);
         construirTemplate(json.nombre, json.telefono, json.id);
