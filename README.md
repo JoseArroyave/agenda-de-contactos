@@ -8,4 +8,6 @@ Se realizó una agenda de contactos usando <b>AJAX</b>, <b>PHP</b>, <b>MySQL</b>
 
 <b>AJAX</b>: Permite la actualización de la tabla/agenda sin tener que recargar la página completa gracias al envío y obtención de datos en el background mediante a peticiones en formato JSON.
 
-<b>Al descargar es indispensable crear una bd llamada "contactos" en phpmyadmin con una tabla de igual nombre que contenga las columnas "id", "nombre" y "numero".</b>
+Si se desea clonar el repositorio, se recomienda desplegar una base de datos SQL y actualizar la conexión en el archivo [bd_conexion.php](https://github.com/JoseArroyave/agenda-de-contactos/blob/main/funciones/bd_conexion.php).
+
+Para datos de prueba se recomienda importar a la base de datos creada el archivo sql en la carpeta [SQL](https://github.com/JoseArroyave/agenda-de-contactos/tree/main/sql).
